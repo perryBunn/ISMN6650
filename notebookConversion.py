@@ -49,7 +49,7 @@ def extractcode(filename):
             for line in cell['source']:
                 codeString += line
             codeString += "\n\n"
-            print(codeString, '\n')
+            # print(codeString, '\n')
             writecode(filename, codeString)
     except BaseException:
         traceback.print_exc()

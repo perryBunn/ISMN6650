@@ -41,19 +41,30 @@ def get_coffee():
 
 get_coffee()
 
-def secure(string):
+def secure(string = "", dev = False):
+    if string == "":
+        condition = True
+        while (condition):
+            string = input("Please enter your password: ")
+            stringCheck = input("Please enter your password again: ")
+            if string == stringCheck:
+                condition = False 
     if len(string) >= 8:
         if any(c.islower() for c in string):
             if any(c.isupper() for c in string):
                 if any(c.isdigit() for c in string):
-                    return True
-    return False
+                    return "'" + string + "' is a valid password"
+    if not dev:
+        print("'" + string + "' is not a valid password")
+        secure()
+    else: return "Not Valid"
     
-print(secure("no"))        # False 
-print(secure("12345678"))  # False
-print(secure("no123456"))  # False
-print(secure("noNOnoNO"))  # False
-print(secure("yeS12345"))  # True
+print(secure("no", True))        # False 
+print(secure("12345678", True))  # False
+print(secure("no123456", True))  # False
+print(secure("noNOnoNO", True))  # False
+print(secure("yeS12345", True))  # True
+print(secure())                  # User input
 
 # Because I can
 def factorial(n):
@@ -68,4 +79,6 @@ print(factorial(3))
 print(factorial(4))
 print(factorial(5))
 print(factorial(6))
+
+
 
