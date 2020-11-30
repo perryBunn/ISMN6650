@@ -33,10 +33,18 @@ def main(arguments):
     plt.show()
 
     # I have no fucking idea what im suppose to do with this histogram
-    customer_data["quantity"].plot.hist(density=True)
+    customer_data["quantity"].plot(kind='hist')
     plt.show()
 
-
+    # Line graph for quantity per month, if they want the number of transactions that can be done too
+    line_data = data.filter(items=['name', 'quantity', 'date'])
+    line_data.index = pd.to_datetime(line_data['date'], format='%Y-%m-%d %H:%M:%S')
+    ax = line_data.groupby(by=[line_data.index.month])['quantity'].sum().plot(legend=False, ylabel='items', xlabel='month')
+    # line_data.groupby(by=[line_data.index.month])['quantity'].count().plot(legend=False, ylabel='transactions',
+    #                                                                        xlabel='month')
+    fig = ax.get_figure()
+    plt.show()
+    fig.savefig('linechart.png')
 
 
 if __name__ == '__main__':
